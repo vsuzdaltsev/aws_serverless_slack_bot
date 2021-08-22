@@ -1,0 +1,53 @@
+service:  aws-serverless-slack-bot
+
+custom:
+  maintainer: vsevolod.suzdaltsev
+  description: "AWS Serverless slack bot"
+  mgmt_region: us-east-1
+  owner: vsevolod.suzdaltsev
+  aws_serverless_slack_bot_dir: aws_serverless_slack_bot
+
+provider:
+  name: aws
+  runtime: python3.8
+  stage: dev
+  region: us-east-1
+  stackTags:
+    DEPLOYMENT_TOOL: sls
+    MAINTAINER: ${self:custom.maintainer}
+    DESCRIPTION: ${self:custom.description}
+    NAME: ${self:service}-sls
+    BUSINESSUNIT: DevOps
+    OWNER:  ${self:custom.owner}
+  tags:
+    NAME: ${self:service}-lambda
+    OWNER: ${self:custom.owner}
+
+package:
+  individually: true
+
+functions:
+  aws_serverless_slack_bot:
+    description: ${self:custom.description}
+    handler: ${self:custom.aws_serverless_slack_bot_dir}/bot.bot
+    name: ${self:custom.aws_serverless_slack_bot_dir}
+    timeout: 30
+
+    events:
+      - http:
+          integration: lambda
+          path: bot
+          method: post
+    environment:
+      PYTHONPATH: "${PYTHONPATH}:/var/task"
+      LOG_LEVEL: DEBUG
+      BOT_TOKEN: ${file(config.${self:provider.stage}.json):BOT_TOKEN}
+      SIGNING_SECRET: ${file(config.${self:provider.stage}.json):SIGNING_SECRET}
+      SLACK_VERIFICATION_TOKEN: ${file(config.${self:provider.stage}.json):SLACK_VERIFICATION_TOKEN}
+
+    package:
+      exclude:
+        - "**"
+      include:
+        - ${self:custom.aws_serverless_slack_bot_dir}/bot.py
+        - "lib/*"
