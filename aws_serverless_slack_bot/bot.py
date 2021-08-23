@@ -22,7 +22,7 @@ def verify_request(event, logger):
     try:
         return event['body']['token'] == os.environ['SLACK_VERIFICATION_TOKEN']
     except Exception as err:
-        logger.error(f">> Something happen during checking verification token: {err}")
+        logger.error(f">> Something happened during checking verification token: {err}")
         return None
 
 
