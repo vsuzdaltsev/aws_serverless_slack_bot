@@ -21,10 +21,11 @@ export AWS_SECRET_ACCESS_KEY="<your secret access key here>"
 ```
 # vim config.dev.json
 >>
+
 {
-"BOT_TOKEN": "<slack bot token here>",
-"SLACK_VERIFICATION_TOKEN": "<slack verification token here>",
-"SIGNING_SECRET": "<slack signing secret here>"
+    "BOT_TOKEN": "<slack bot token here>",
+    "SLACK_VERIFICATION_TOKEN": "<slack verification token here>",
+    "SIGNING_SECRET": "<slack signing secret here>"
 }
 ```
 
