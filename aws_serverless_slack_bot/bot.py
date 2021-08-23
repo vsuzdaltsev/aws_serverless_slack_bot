@@ -11,7 +11,6 @@ from lib.log import Log
 
 
 BOT_TOKEN = os.getenv("BOT_TOKEN")
-
 SLACK_URL = "https://slack.com/api/chat.postMessage"
 
 
