@@ -13,7 +13,6 @@
 export AWS_REGION='<your AWS region here>'
 export AWS_ACCESS_KEY_ID="<your access key id here>"
 export AWS_SECRET_ACCESS_KEY="<your secret access key here>"
-
 ```
 
 * Create config file in the repo's root:
