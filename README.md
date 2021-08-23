@@ -5,7 +5,7 @@
 * Serverless framework
 * AWS credentials
 
-### Development
+### Development:
 
 * Export AWS credentials to the current shell:
 
