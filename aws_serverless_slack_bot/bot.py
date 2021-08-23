@@ -58,7 +58,7 @@ def bot(event, _context):
                     user_message = slack_event['text']
                     logger.info('User Message: {}'.format(user_message))
 
-                    bot_reply = "Hello I'm NotificationBot"
+                    bot_reply = "Hello, I'm NotificationBot. Let's do something useful"
                     channel_id = slack_event["channel"]
 
                     if len(user_message) > 0:
