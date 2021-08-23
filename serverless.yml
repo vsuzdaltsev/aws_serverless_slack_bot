@@ -22,6 +22,7 @@ provider:
   tags:
     NAME: ${self:service}-lambda
     OWNER: ${self:custom.owner}
+  lambdaHashingVersion: "20201221"
 
 package:
   individually: true
@@ -46,8 +47,7 @@ functions:
       SLACK_VERIFICATION_TOKEN: ${file(config.${self:provider.stage}.json):SLACK_VERIFICATION_TOKEN}
 
     package:
-      exclude:
-        - "**"
-      include:
+      patterns:
+        - "!**"
         - ${self:custom.aws_serverless_slack_bot_dir}/bot.py
-        - "lib/*"
+        - "lib/**"
